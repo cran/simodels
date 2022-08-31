@@ -1,6 +1,6 @@
 Package: simodels
 Title: Flexible Framework for Developing Spatial Interaction Models
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: c(
     person("Robin", "Lovelace", , "rob00x@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5679-6536")),
@@ -24,11 +24,11 @@ Suggests: ggplot2, knitr, minpack.lm, rmarkdown, tmap
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 NeedsCompilation: no
-Packaged: 2022-06-13 22:56:18 UTC; robin
+Packaged: 2022-08-31 20:56:36 UTC; robin
 Author: Robin Lovelace [aut, cre] (<https://orcid.org/0000-0001-5679-6536>),
   Jakub Nowosad [aut] (<https://orcid.org/0000-0002-1057-3721>)
 Maintainer: Robin Lovelace <rob00x@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-06-15 07:10:02 UTC
+Date/Publication: 2022-08-31 21:10:02 UTC

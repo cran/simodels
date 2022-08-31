@@ -8,29 +8,14 @@ knitr::opts_chunk$set(
 library(simodels)
 library(dplyr)
 library(ggplot2)
+library(sf)
 
-## ----import-------------------------------------------------------------------
-u1 = "https://github.com/Robinlovelace/simodels/releases/download/0.0.1/zones_aus.geojson"
-zones_aus = sf::read_sf(u1)
-u2 = "https://www.dropbox.com/s/wi3zxlq5pff1yda/AusMig2011.csv?raw=1"
-od_aus = read.csv(u2)
-
-## ---- echo=FALSE, eval=FALSE--------------------------------------------------
-#  u1 = "https://www.dropbox.com/s/0fg80nzcxcsybii/GCCSA_2016_AUST_New.geojson?raw=1" # original
-#  zones_original = sf::read_sf(u1)
-#  sf::write_sf(zones_original, "GCCSA_2016_AUST_New.geojson")
-#  lobstr::obj_size(zones_original$geometry) / lobstr::obj_size(zones_original)
-#  # 99% of size taken up with geometry, no need for spatial resolution -> simplify
-#  piggyback::pb_upload("GCCSA_2016_AUST_New.geojson")
-#  readr::write_csv(od_aus, "od_migration_original.csv")
-#  piggyback::pb_upload("od_migration_original.csv")
-#  library(sf)
-#  zones_aus_simplified = rmapshaper::ms_simplify(zones_original, keep = 0.001)
-#  lobstr::obj_size(zones_aus_simplified) / lobstr::obj_size(zones_original)
-#  # 0.2% of the size
-#  plot(zones_aus_simplified$geometry[1]) # still too detailed?
-#  sf::write_sf(zones_aus_simplified, "zones_aus.geojson")
-#  piggyback::pb_upload("zones_aus.geojson")
+## ----import, eval=FALSE-------------------------------------------------------
+#  # To get the data (pre-loaded in the package)
+#  u1 = "https://github.com/Robinlovelace/simodels/releases/download/0.0.1/zones_aus.geojson"
+#  zones_aus = sf::read_sf(u1)
+#  u2 = "https://www.dropbox.com/s/wi3zxlq5pff1yda/AusMig2011.csv?raw=1"
+#  od_aus = read.csv(u2)
 
 ## ----clean--------------------------------------------------------------------
 dim(zones_aus)
