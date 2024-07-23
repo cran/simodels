@@ -1,6 +1,9 @@
+
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/robinlovelace/simodels/workflows/R-CMD-check/badge.svg)](https://github.com/robinlovelace/simodels/actions)
+[![R-CMD-check](https://github.com/Robinlovelace/simodels/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Robinlovelace/simodels/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of {simodels} is to provide a simple,
@@ -28,6 +31,12 @@ install.packages("remotes") # if not already installed
 
 ``` r
 remotes::install_github("robinlovelace/simodels")
+```
+
+To get the develoment version do:
+
+``` r
+devtools::load_all()
 ```
 
 <!-- # Implementations in other languages -->
@@ -107,7 +116,7 @@ od_res %>%
      8        287. (-1.704658 53.91073, -1.743949 53.88035)
      9        267. (-1.704658 53.91073, -1.710657 53.87087)
     10        186. (-1.704658 53.91073, -1.694076 53.86729)
-    # … with 2,495 more rows
+    # ℹ 2,495 more rows
 
 The resulting estimates of interaction, returned in the column
 `interaction` and plotted with distance in the graphic above, resulted
@@ -182,7 +191,7 @@ od_to_pubs_result %>%
      8 E02002337 127960333 The Chemic Tavern        37.2 (-1.743949 53.88035, -1.55…
      9 E02002338 127960333 The Chemic Tavern        36.8 (-1.710657 53.87087, -1.55…
     10 E02002339 127960333 The Chemic Tavern        29.0 (-1.694076 53.86729, -1.55…
-    # … with 204 more rows
+    # ℹ 204 more rows
 
 We can plot the top 20 desire lines between zone centroids and the 2
 pubs in the example dataset as follows:
@@ -220,14 +229,12 @@ Adam Dennett’s [2018 paper](https://doi.org/10.37970/aps.v2i2.38).
 
 ## Other SIM packages
 
--   The [`spflow` R package](https://github.com/LukeCe/spflow)
--   The [`spint` Python
-    package](https://spint.readthedocs.io/en/latest/)
--   The [`gravity`](https://cran.r-project.org/package=gravity) R
-    package
--   The
-    [`mobility`](https://covid-19-mobility-data-network.github.io/mobility/index.html)
-    R package
--   The [gravity functions in the
-    scikit-mobility](https://scikit-mobility.github.io/scikit-mobility/reference/models.html#module-skmob.models.gravity)
-    Python package
+- The [`spflow` R package](https://github.com/LukeCe/spflow)
+- The [`spint` Python package](https://spint.readthedocs.io/en/latest/)
+- The [`gravity`](https://cran.r-project.org/package=gravity) R package
+- The
+  [`mobility`](https://covid-19-mobility-data-network.github.io/mobility/index.html)
+  R package
+- The [gravity functions in the
+  scikit-mobility](https://scikit-mobility.github.io/scikit-mobility/reference/models.html#module-skmob.models.gravity)
+  Python package
