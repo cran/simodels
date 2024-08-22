@@ -27,31 +27,46 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
 
 <style type="text/css">
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
 <style type="text/css">
-code {
-white-space: pre;
-}
-.sourceCode {
-overflow: visible;
-}
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -63,54 +78,55 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-{ counter-reset: source-line 0; }
+  { counter-reset: source-line 0; }
 pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
+  { position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-color: #aaaaaa;
-}
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-{ }
+  {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } 
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.at { color: #7d9029; } 
-code span.bn { color: #40a070; } 
-code span.bu { color: #008000; } 
-code span.cf { color: #007020; font-weight: bold; } 
-code span.ch { color: #4070a0; } 
-code span.cn { color: #880000; } 
-code span.co { color: #60a0b0; font-style: italic; } 
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.do { color: #ba2121; font-style: italic; } 
-code span.dt { color: #902000; } 
-code span.dv { color: #40a070; } 
-code span.er { color: #ff0000; font-weight: bold; } 
-code span.ex { } 
-code span.fl { color: #40a070; } 
-code span.fu { color: #06287e; } 
-code span.im { color: #008000; font-weight: bold; } 
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.kw { color: #007020; font-weight: bold; } 
-code span.op { color: #666666; } 
-code span.ot { color: #007020; } 
-code span.pp { color: #bc7a00; } 
-code span.sc { color: #4070a0; } 
-code span.ss { color: #bb6688; } 
-code span.st { color: #4070a0; } 
-code span.va { color: #19177c; } 
-code span.vs { color: #4070a0; } 
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -143,28 +159,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 
 
 
-<style type="text/css">
-
-div.csl-bib-body { }
-div.csl-entry {
-clear: both;
-}
-.hanging div.csl-entry {
-margin-left:2em;
-text-indent:-2em;
-}
-div.csl-left-margin {
-min-width:2em;
-float:left;
-}
-div.csl-right-inline {
-margin-left:2em;
-padding-left:1em;
-}
-div.csl-indent {
-margin-left: 2em;
-}
-</style>
 
 <style type="text/css">body {
 background-color: #fff;
@@ -363,201 +357,145 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <div id="prerequisites" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Prerequisites</h1>
-<p>You need to have <a href="https://cran.r-project.org/">installed
-R</a> and a suitable editor such as <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> or <a href="https://github.com/REditorSupport/vscode-R">VSCode with R
-plugin</a>. See the package’s <a href="https://robinlovelace.github.io/simodels/">README</a> for
-instructions on installing the {simodels} package.</p>
+<h1 number="1"><span class="header-section-number">1</span> Prerequisites</h1>
+<p>You need to have <a href="https://cran.r-project.org/">installed R</a> and a suitable editor such as <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> or <a href="https://github.com/REditorSupport/vscode-R">VSCode with R plugin</a>. See the package’s <a href="https://robinlovelace.github.io/simodels/">README</a> for instructions on installing the {simodels} package.</p>
 <!--#  Test the necessary packages are installed by loading them (we will also use {dplyr}):-->
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(simodels)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(simodels)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="kw">library</span>(sf)</span></code></pre></div>
 </div>
 <div id="input-data" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Input data</h1>
-<p>This tutorial builds on a <a href="https://github.com/adamdennett/SIModelling/blob/SIModelling-Edits/SimAus2.Rmd">reproducible</a>
-guide to SIMs in R <span class="citation">(Dennett 2018)</span>. We
-start by importing open access data representing movement between zones
-in Australia (thanks to Adam Dennett for making the files
-accessible):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># To get the data (pre-loaded in the package)</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>u1 <span class="ot">=</span> <span class="st">&quot;https://github.com/Robinlovelace/simodels/releases/download/0.0.1/zones_aus.geojson&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>zones_aus <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">read_sf</span>(u1)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>u2 <span class="ot">=</span> <span class="st">&quot;https://www.dropbox.com/s/wi3zxlq5pff1yda/AusMig2011.csv?raw=1&quot;</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>od_aus <span class="ot">=</span> <span class="fu">read.csv</span>(u2)</span></code></pre></div>
-<p>Let’s take a quick look at and ‘minimize’ these input datasets before
-modelling them with SIMs:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">dim</span>(zones_aus)</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">names</span>(zones_aus)</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>key_zone_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;GCCSA_CODE&quot;</span>, <span class="st">&quot;GCCSA_NAME&quot;</span>, <span class="st">&quot;AREA_SQKM&quot;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>zones <span class="ot">=</span> zones_aus[key_zone_names]</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">head</span>(zones, <span class="dv">2</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">dim</span>(od_aus)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">names</span>(od_aus)</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>key_od_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Orig_code&quot;</span>, <span class="st">&quot;Dest_code&quot;</span>, <span class="st">&quot;Flow&quot;</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>od <span class="ot">=</span> od_aus[key_od_names]</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="fu">head</span>(od, <span class="dv">2</span>)</span></code></pre></div>
+<h1 number="2"><span class="header-section-number">2</span> Input data</h1>
+<p>This tutorial builds on a <a href="https://github.com/adamdennett/SIModelling/blob/SIModelling-Edits/SimAus2.Rmd">reproducible</a> guide to SIMs in R <span class="citation">(Dennett 2018)</span>. We start by importing open access data representing movement between zones in Australia (thanks to Adam Dennett for making the files accessible):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co"># To get the data (pre-loaded in the package)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>u1 =<span class="st"> &quot;https://github.com/Robinlovelace/simodels/releases/download/0.0.1/zones_aus.geojson&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>zones_aus =<span class="st"> </span>sf<span class="op">::</span><span class="kw">read_sf</span>(u1)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>u2 =<span class="st"> &quot;https://www.dropbox.com/s/wi3zxlq5pff1yda/AusMig2011.csv?raw=1&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>od_aus =<span class="st"> </span><span class="kw">read.csv</span>(u2)</span></code></pre></div>
+<p>Let’s take a quick look at and ‘minimize’ these input datasets before modelling them with SIMs:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">dim</span>(zones_aus)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">names</span>(zones_aus)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>key_zone_names =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;GCCSA_CODE&quot;</span>, <span class="st">&quot;GCCSA_NAME&quot;</span>, <span class="st">&quot;AREA_SQKM&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>zones =<span class="st"> </span>zones_aus[key_zone_names]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="kw">head</span>(zones, <span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="kw">dim</span>(od_aus)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="kw">names</span>(od_aus)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>key_od_names =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Orig_code&quot;</span>, <span class="st">&quot;Dest_code&quot;</span>, <span class="st">&quot;Flow&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>od =<span class="st"> </span>od_aus[key_od_names]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a><span class="kw">head</span>(od, <span class="dv">2</span>)</span></code></pre></div>
 <p>The results printed above show that:</p>
 <ul>
-<li><p><code>zones_aus</code> represents the 15 regions of Australia,
-with columns containing zone identifiers (IDs), primarily
-<code>GCCSA_CODE</code>, and the area of each zone
-(<code>AREA_SQKM</code>). The minimal <code>zones</code> object contains
-only the region code, name, and area.</p></li>
-<li><p><code>od_aus</code> contains 225 rows of data representing the
-movement of people between the zones in <code>aus</code>. Note that 255
-is 15 squared, meaning that this OD dataset contains the complete
-combination of migration flows, starting with zone <code>1GSYD</code> to
-<code>1GSYD</code>. These codes are present in the
-<code>GCCSA_CODE</code> column in the <code>aus</code> object. The first
-row of the OD dataset represents ‘intra-zonal’ migrations in Greater
-Sydney, presumably counting the number of people who move house from
-somewhere in the region to another home in the region. There are 13
-columns in this dataset, the most important of which are
-<code>Orig_code</code>, <code>Dest_code</code>, and <code>Flow</code>,
-which we have captured in the minimal <code>od</code> dataset.</p></li>
+<li><p><code>zones_aus</code> represents the 15 regions of Australia, with columns containing zone identifiers (IDs), primarily <code>GCCSA_CODE</code>, and the area of each zone (<code>AREA_SQKM</code>). The minimal <code>zones</code> object contains only the region code, name, and area.</p></li>
+<li><p><code>od_aus</code> contains 225 rows of data representing the movement of people between the zones in <code>aus</code>. Note that 255 is 15 squared, meaning that this OD dataset contains the complete combination of migration flows, starting with zone <code>1GSYD</code> to <code>1GSYD</code>. These codes are present in the <code>GCCSA_CODE</code> column in the <code>aus</code> object. The first row of the OD dataset represents ‘intra-zonal’ migrations in Greater Sydney, presumably counting the number of people who move house from somewhere in the region to another home in the region. There are 13 columns in this dataset, the most important of which are <code>Orig_code</code>, <code>Dest_code</code>, and <code>Flow</code>, which we have captured in the minimal <code>od</code> dataset.</p></li>
 </ul>
-<p>Note: a useful convention with ‘long form’ OD datasets is for the
-first two columns to contain zone IDs that correspond to values in the
-first column of the zone dataset. The R package <a href="https://itsleeds.github.io/od/">{od}</a>, on which {simodels}
-builds, assumes that inputs to its functions are in this form.</p>
-<p>It is a good idea to verify that the origin and destination codes in
-the <code>od</code> dataset match the zone codes in
-<code>zones</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">summary</span>(od[[<span class="dv">1</span>]] <span class="sc">%in%</span> zones[[<span class="dv">1</span>]])</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">summary</span>(od[[<span class="dv">2</span>]] <span class="sc">%in%</span> zones[[<span class="dv">1</span>]])</span></code></pre></div>
-<p>It is clear from the above that we have ‘clean’ input datasets, let’s
-begin with the modelling!</p>
+<p>Note: a useful convention with ‘long form’ OD datasets is for the first two columns to contain zone IDs that correspond to values in the first column of the zone dataset. The R package <a href="https://itsleeds.github.io/od/">{od}</a>, on which {simodels} builds, assumes that inputs to its functions are in this form.</p>
+<p>It is a good idea to verify that the origin and destination codes in the <code>od</code> dataset match the zone codes in <code>zones</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">summary</span>(od[[<span class="dv">1</span>]] <span class="op">%in%</span><span class="st"> </span>zones[[<span class="dv">1</span>]])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="kw">summary</span>(od[[<span class="dv">2</span>]] <span class="op">%in%</span><span class="st"> </span>zones[[<span class="dv">1</span>]])</span></code></pre></div>
+<p>It is clear from the above that we have ‘clean’ input datasets, let’s begin with the modelling!</p>
 </div>
 <div id="preparing-a-sim" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Preparing a SIM</h1>
-<p>Key to the workings of the {simodels} package is the conversion of
-geographic objects representing origins and destinations into an OD
-dataset. In this case, we already have an OD dataset, so this step is
-less relevant. However, we will take this step in any case because many
-SIMs start without such a comprehensive OD dataset as we have in this
-case.</p>
+<h1 number="3"><span class="header-section-number">3</span> Preparing a SIM</h1>
+<p>Key to the workings of the {simodels} package is the conversion of geographic objects representing origins and destinations into an OD dataset. In this case, we already have an OD dataset, so this step is less relevant. However, we will take this step in any case because many SIMs start without such a comprehensive OD dataset as we have in this case.</p>
 <p>Prepare the OD dataset as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>od_sim <span class="ot">=</span> <span class="fu">si_to_od</span>(<span class="at">origins =</span> zones, <span class="at">destinations =</span> zones)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">names</span>(od_sim)</span></code></pre></div>
-<p>Note that the output has duplicate columns: <code>si_to_od()</code>
-joins data from the origin and destination objects into the resulting OD
-object.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>od_sim =<span class="st"> </span><span class="kw">si_to_od</span>(<span class="dt">origins =</span> zones, <span class="dt">destinations =</span> zones)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">names</span>(od_sim)</span></code></pre></div>
+<p>Note that the output has duplicate columns: <code>si_to_od()</code> joins data from the origin and destination objects into the resulting OD object.</p>
 </div>
 <div id="an-unconstrained-sim" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> An unconstrained
-SIM</h1>
-<p>A simplistic SIM - in this case an inverse power distance decay
-function (negative exponential is another commonly used decay function)
-- can be created just based on the distance between points:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>si_power <span class="ot">=</span> <span class="cf">function</span>(d, beta) (d <span class="sc">/</span> <span class="dv">1000</span>)<span class="sc">^</span>beta</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>od_calculated <span class="ot">=</span> <span class="fu">si_calculate</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  od_sim,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="at">fun =</span> si_power,</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="at">d =</span> distance_euclidean,</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="at">beta =</span> <span class="sc">-</span><span class="fl">0.8</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  )</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="fu">plot</span>(od_calculated[<span class="st">&quot;interaction&quot;</span>], <span class="at">logz =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>This approach, ignoring all variables at the level of trip origins
-and destinations, results in flow estimates with no units. Before
-learning how to run constrained SIMs, let’s scale the result by the
-total flow and see how far we are from reality, just focussing on the
-interzonal OD pairs:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>od_interzonal <span class="ot">=</span> od <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">filter</span>(Orig_code <span class="sc">!=</span> Dest_code)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>od_calculated_interzonal <span class="ot">=</span> od_calculated <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="fu">filter</span>(O <span class="sc">!=</span> D) </span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>scale_factor <span class="ot">=</span> <span class="fu">sum</span>(od_interzonal<span class="sc">$</span>Flow) <span class="sc">/</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">sum</span>(od_calculated_interzonal<span class="sc">$</span>interaction)</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>od_calculated_interzonal <span class="ot">=</span> od_calculated_interzonal <span class="sc">%&gt;%</span> </span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">interaction_scaled =</span> interaction <span class="sc">*</span> scale_factor)</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>od_joined <span class="ot">=</span> <span class="fu">inner_join</span>(</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  od_calculated_interzonal,</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  od <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">O =</span> Orig_code, <span class="at">D =</span> Dest_code)</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  )</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>od_joined <span class="sc">%&gt;%</span> </span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(Flow, interaction_scaled))</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="fu">cor</span>(od_joined<span class="sc">$</span>Flow, od_joined<span class="sc">$</span>interaction_scaled)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
-<p>The results show that a simple unconstrained model, without any
-parameter fitting, can explain less than 20% of the variability in
-flows. We can do better!</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>od_joined <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">decay =</span> distance_euclidean<span class="sc">^-</span><span class="fl">0.8</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">decay =</span> decay <span class="sc">*</span> (<span class="fu">sum</span>(Flow) <span class="sc">/</span> <span class="fu">sum</span>(decay))) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(distance_euclidean, Flow)) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(distance_euclidean, decay), <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
+<h1 number="4"><span class="header-section-number">4</span> An unconstrained SIM</h1>
+<p>A simplistic SIM - in this case an inverse power distance decay function (negative exponential is another commonly used decay function) - can be created just based on the distance between points:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>si_power =<span class="st"> </span><span class="cf">function</span>(d, beta) (d <span class="op">/</span><span class="st"> </span><span class="dv">1000</span>)<span class="op">^</span>beta</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>od_calculated =<span class="st"> </span><span class="kw">si_calculate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>  od_sim,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>  <span class="dt">fun =</span> si_power,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>  <span class="dt">d =</span> distance_euclidean,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>  <span class="dt">beta =</span> <span class="fl">-0.8</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>  )</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="kw">plot</span>(od_calculated[<span class="st">&quot;interaction&quot;</span>], <span class="dt">logz =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>This approach, ignoring all variables at the level of trip origins and destinations, results in flow estimates with no units. Before learning how to run constrained SIMs, let’s scale the result by the total flow and see how far we are from reality, just focussing on the interzonal OD pairs:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>od_interzonal =<span class="st"> </span>od <span class="op">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(Orig_code <span class="op">!=</span><span class="st"> </span>Dest_code)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>od_calculated_interzonal =<span class="st"> </span>od_calculated <span class="op">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(O <span class="op">!=</span><span class="st"> </span>D) </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>scale_factor =<span class="st"> </span><span class="kw">sum</span>(od_interzonal<span class="op">$</span>Flow) <span class="op">/</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">sum</span>(od_calculated_interzonal<span class="op">$</span>interaction)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>od_calculated_interzonal =<span class="st"> </span>od_calculated_interzonal <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">interaction_scaled =</span> interaction <span class="op">*</span><span class="st"> </span>scale_factor)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>od_joined =<span class="st"> </span><span class="kw">inner_join</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>  od_calculated_interzonal,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>  od <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">O =</span> Orig_code, <span class="dt">D =</span> Dest_code)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>  )</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>od_joined <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Flow, interaction_scaled))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a><span class="kw">cor</span>(od_joined<span class="op">$</span>Flow, od_joined<span class="op">$</span>interaction_scaled)<span class="op">^</span><span class="dv">2</span></span></code></pre></div>
+<p>The results show that a simple unconstrained model, without any parameter fitting, can explain less than 20% of the variability in flows. We can do better!</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>od_joined <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decay =</span> distance_euclidean<span class="op">^-</span><span class="fl">0.8</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decay =</span> decay <span class="op">*</span><span class="st"> </span>(<span class="kw">sum</span>(Flow) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(decay))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(distance_euclidean, Flow)) <span class="op">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(distance_euclidean, decay), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
 </div>
 <div id="a-production-constrained-sim" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> A production
-constrained SIM</h1>
-<p>The first logical way to improve model fit is to run a production
-constrained model. To do that, we’ll first calculate the total number of
-people leaving each zone and then use the
-<code>constraint_production</code> argument:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>od_originating <span class="ot">=</span> od_joined <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="fu">group_by</span>(O) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">originating_per_zone =</span> <span class="fu">sum</span>(Flow)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>od_constrained_p <span class="ot">=</span> <span class="fu">si_calculate</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  od_originating,</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="at">fun =</span> si_power,</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="at">d =</span> distance_euclidean,</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="at">beta =</span> <span class="sc">-</span><span class="fl">0.8</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="at">constraint_production =</span> originating_per_zone</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  )</span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>od_constrained_p <span class="sc">%&gt;%</span> </span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(Flow, interaction))</span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="fu">cor</span>(od_constrained_p<span class="sc">$</span>Flow, od_constrained_p<span class="sc">$</span>interaction)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
-<p>Progress! We have more than doubled the predictive ability of our
-model by using a ‘production constrained’ SIM, as defined mathematically
-in the <a href="https://robinlovelace.github.io/simodels/articles/sims-first-principles.html"><code>simodels-first-principles</code>
-vignette</a>.</p>
+<h1 number="5"><span class="header-section-number">5</span> A production constrained SIM</h1>
+<p>The first logical way to improve model fit is to run a production constrained model. To do that, we’ll first calculate the total number of people leaving each zone and then use the <code>constraint_production</code> argument:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>od_originating =<span class="st"> </span>od_joined <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(O) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">originating_per_zone =</span> <span class="kw">sum</span>(Flow)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>od_constrained_p =<span class="st"> </span><span class="kw">si_calculate</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>  od_originating,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>  <span class="dt">fun =</span> si_power,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>  <span class="dt">d =</span> distance_euclidean,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>  <span class="dt">beta =</span> <span class="fl">-0.8</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>  <span class="dt">constraint_production =</span> originating_per_zone</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>  )</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>od_constrained_p <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(Flow, interaction))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a><span class="kw">cor</span>(od_constrained_p<span class="op">$</span>Flow, od_constrained_p<span class="op">$</span>interaction)<span class="op">^</span><span class="dv">2</span></span></code></pre></div>
+<p>Progress! We have more than doubled the predictive ability of our model by using a ‘production constrained’ SIM, as defined mathematically in the <a href="https://robinlovelace.github.io/simodels/articles/sims-first-principles.html"><code>simodels-first-principles</code> vignette</a>.</p>
 </div>
 <div id="training-a-sim" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Training a SIM</h1>
-<p>An advantage of the flow data used in this example is that we already
-know the interaction. (This raises the question of why a SIM is needed,
-answer: to test our models and demonstrate the techniques.)</p>
+<h1 number="6"><span class="header-section-number">6</span> Training a SIM</h1>
+<p>An advantage of the flow data used in this example is that we already know the interaction. (This raises the question of why a SIM is needed, answer: to test our models and demonstrate the techniques.)</p>
 <p>We can do this using the <code>nls()</code> function as follows:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">library</span>(minpack.lm)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>f <span class="ot">=</span> Flow <span class="sc">~</span> a <span class="sc">*</span> (distance_euclidean)<span class="sc">^</span>b</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">nlsLM</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  <span class="at">formula =</span> f,</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>  <span class="at">data =</span> od_originating,</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  )</span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>m</span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># Nonlinear regression model</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#   model: Flow ~ a * (distance_euclidean)^b</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#    data: od_originating</span></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#          a          b </span></span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#  2.182e+07 -5.801e-01 </span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>od_joined <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">decay =</span> distance_euclidean<span class="sc">^-</span><span class="fl">5.801e-01</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">decay =</span> decay <span class="sc">*</span> <span class="fl">2.182e+07</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(distance_euclidean, Flow)) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(distance_euclidean, decay), <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>od_pred <span class="ot">=</span> <span class="fu">si_predict</span>(od_originating, <span class="at">model =</span> m)</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">cor</span>(od_pred<span class="sc">$</span>Flow, od_pred<span class="sc">$</span>interaction)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>od_pred_const <span class="ot">=</span> <span class="fu">si_predict</span>(od_originating, <span class="at">model =</span> m,</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="at">constraint_production =</span> originating_per_zone)</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="fu">cor</span>(od_pred_const<span class="sc">$</span>Flow, od_pred_const<span class="sc">$</span>interaction)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">ttm</span>()</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="fu">tm_shape</span>(od_pred_const) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  <span class="fu">tm_lines</span>(<span class="st">&quot;interaction_scaled&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;viridis&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">library</span>(minpack.lm)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>f =<span class="st"> </span>Flow <span class="op">~</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span>(distance_euclidean)<span class="op">^</span>b</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>m =<span class="st"> </span><span class="kw">nlsLM</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>  <span class="dt">formula =</span> f,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a>  <span class="dt">data =</span> od_originating,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>  )</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>m</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="co"># Nonlinear regression model</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="co">#   model: Flow ~ a * (distance_euclidean)^b</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a><span class="co">#    data: od_originating</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a><span class="co">#          a          b </span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a><span class="co">#  2.182e+07 -5.801e-01 </span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>od_joined <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decay =</span> distance_euclidean<span class="op">^-</span><span class="fl">5.801e-01</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decay =</span> decay <span class="op">*</span><span class="st"> </span><span class="fl">2.182e+07</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(distance_euclidean, Flow)) <span class="op">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(distance_euclidean, decay), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>od_pred =<span class="st"> </span><span class="kw">si_predict</span>(od_originating, <span class="dt">model =</span> m)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="kw">cor</span>(od_pred<span class="op">$</span>Flow, od_pred<span class="op">$</span>interaction)<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>od_pred_const =<span class="st"> </span><span class="kw">si_predict</span>(od_originating, <span class="dt">model =</span> m,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>  <span class="dt">constraint_production =</span> originating_per_zone)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a><span class="kw">cor</span>(od_pred_const<span class="op">$</span>Flow, od_pred_const<span class="op">$</span>interaction)<span class="op">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">library</span>(tmap)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a><span class="kw">ttm</span>()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a><span class="kw">tm_shape</span>(od_pred_const) <span class="op">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">tm_lines</span>(<span class="st">&quot;interaction_scaled&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;viridis&quot;</span>)</span></code></pre></div>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-dennett_modelling_2018" class="csl-entry">
-Dennett, Adam. 2018. <span>“Modelling Population Flows Using Spatial
-Interaction Models.”</span> <em>Australian Population Studies</em> 2
-(2): 33–58. <a href="https://doi.org/10.37970/aps.v2i2.38">https://doi.org/10.37970/aps.v2i2.38</a>.
+<div id="references" class="section level1 unnumbered" number>
+<h1 class="unnumbered" number>References</h1>
+<div id="refs" class="references hanging-indent">
+<div id="ref-dennett_modelling_2018">
+<p>Dennett, Adam. 2018. “Modelling Population Flows Using Spatial Interaction Models.” <em>Australian Population Studies</em> 2 (2): 33–58. <a href="https://doi.org/10.37970/aps.v2i2.38">https://doi.org/10.37970/aps.v2i2.38</a>.</p>
 </div>
 </div>
 </div>

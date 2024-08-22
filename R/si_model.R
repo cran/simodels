@@ -27,7 +27,7 @@
 #' @examples
 #' od = si_to_od(si_zones, si_zones, max_dist = 4000)
 #' fun_dd = function(d = "distance_euclidean", beta = 0.3) exp(-beta * d / 1000)
-#' fun_dd(d = (1:5)*1000)
+#' fun_dd(d = (1:5) * 1000)
 #' od_dd = si_calculate(od, fun = fun_dd, d = distance_euclidean)
 #' plot(od$distance_euclidean, od_dd$interaction)
 #' fun = function(O, n, d, beta) O * n * exp(-beta * d / 1000)
@@ -37,6 +37,14 @@
 #' plot(od$distance_euclidean, od_output$interaction)
 #' od_pconst = si_calculate(od, fun = fun, beta = 0.3, O = origin_all,
 #'   n = destination_all, d = distance_euclidean, constraint_production = origin_all)
+#' # Origin totals in OD data should equal origin totals in zone data
+#' library(dplyr)
+#' origin_totals_zones = od_pconst |>
+#'   group_by(geo_code = O) |>
+#'   summarise(all_od = sum(interaction)) |>
+#'   sf::st_drop_geometry()
+#' zones_joined = left_join(si_zones, origin_totals_zones)
+#' plot(zones_joined$all, zones_joined$all_od)
 #' plot(od_pconst$distance_euclidean, od_pconst$interaction)
 #' plot(od_pconst["interaction"], logz = TRUE)
 #' od_dd = si_calculate(od, fun = fun_dd, d = distance_euclidean, output_col = "res")
@@ -106,16 +114,30 @@ constrain_production = function(od, output_col, constraint_production) {
     "{output_col}" := .data[[output_col]] /
       sum(.data[[output_col]]) * dplyr::first( {{constraint_production}} )
   )
+  # browser()
   # # Assert values are correct for test data:
   # od_grouped |>
-  #   select(origin_all, interaction)
-  # od_grouped |>
+  #   select({{constraint_production}}, interaction)
+  # origin_totals = od_grouped |>
+  #   sf::st_drop_geometry() |>
   #   sf::st_drop_geometry() |>
   #   # group_by(1) |>
   #   summarise(
   #     sum = sum(interaction),
-  #     first = first(origin_all)
+  #     first = first({{constraint_production}})
   #   )
+  # cor(origin_totals$sum, origin_totals$first)
+  # # Test for york data:
+  # zone_totals = left_join(
+  #   zones_york |>
+  #     sf::st_drop_geometry() |>
+  #     rename(O = LSOA21CD) |>
+  #     select(O, pupils_estimated),
+  #   origin_totals
+  # )
+
+  
+  
   od = dplyr::ungroup(od_grouped)
   od
 }
